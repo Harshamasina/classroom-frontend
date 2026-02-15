@@ -1,175 +1,114 @@
-import { Subject } from "@/types";
+import { GraduationCap, School } from "lucide-react";
 
-export const DEPARTMENTS = [
-  { value: "CS", label: "Computer Science" },
-  { value: "Math", label: "Mathematics" },
-  { value: "English", label: "English" },
+export const USER_ROLES = {
+    STUDENT: "student",
+    TEACHER: "teacher",
+    ADMIN: "admin",
+};
+
+export const ROLE_OPTIONS = [
+    {
+        value: USER_ROLES.STUDENT,
+        label: "Student",
+        icon: GraduationCap,
+    },
+    {
+        value: USER_ROLES.TEACHER,
+        label: "Teacher",
+        icon: School,
+    },
 ];
 
-export const mockSubjects: Subject[] = [
+export const DEPARTMENTS = [
+    "Computer Science",
+    "Mathematics",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "English",
+    "History",
+    "Geography",
+    "Economics",
+    "Business Administration",
+    "Engineering",
+    "Psychology",
+    "Sociology",
+    "Political Science",
+    "Philosophy",
+    "Education",
+    "Fine Arts",
+    "Music",
+    "Physical Education",
+    "Law",
+] as const;
+
+export const DEPARTMENT_OPTIONS = DEPARTMENTS.map((dept) => ({
+    value: dept,
+    label: dept,
+}));
+
+export const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3MB in bytes
+export const ALLOWED_TYPES = [
+    "image/png",
+    "image/jpeg",
+    "image/jpg",
+    "image/webp",
+];
+
+const getEnvVar = (key: string): string => {
+    const value = import.meta.env[key];
+    if (!value) {
+        throw new Error(`Missing environment variable: ${key}`);
+    }
+    return value;
+};
+
+// export const CLOUDINARY_UPLOAD_URL = getEnvVar("VITE_CLOUDINARY_UPLOAD_URL");
+// export const CLOUDINARY_CLOUD_NAME = getEnvVar("VITE_CLOUDINARY_CLOUD_NAME");
+export const BACKEND_BASE_URL = getEnvVar("VITE_BACKEND_BASE_URL");
+
+export const BASE_URL =  import.meta.env.VITE_API_URL;
+export const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY
+export const REFRESH_TOKEN_KEY = import.meta.env.VITE_REFRESH_TOKEN_KEY
+
+export const REFRESH_TOKEN_URL = `${BASE_URL}/refresh-token`;
+
+// export const CLOUDINARY_UPLOAD_PRESET = getEnvVar("VITE_CLOUDINARY_UPLOAD_PRESET");
+
+export const teachers = [
+    {
+        id: "1",
+        name: "John Doe",
+    },
+    {
+        id: "2",
+        name: "Jane Smith",
+    },
+    {
+        id: "3",
+        name: "Dr. Alan Turing",
+    },
+];
+
+export const subjects = [
     {
         id: 1,
-        name: "Data Structures",
-        code: "CS201",
-        department: "CS",
-        description: "Core concepts of arrays, trees, graphs, and hashing.",
-        created_at: "2025-01-15T09:00:00.000Z",
+        name: "Mathematics",
+        code: "MATH",
     },
     {
         id: 2,
-        name: "Algorithms",
-        code: "CS301",
-        department: "CS",
-        description: "Design and analysis of efficient algorithms.",
-        created_at: "2025-01-18T09:00:00.000Z",
+        name: "Computer Science",
+        code: "CS",
     },
     {
         id: 3,
-        name: "Linear Algebra",
-        code: "MATH221",
-        department: "Math",
-        description: "Vectors, matrices, eigenvalues, and applications.",
-        created_at: "2025-01-20T09:00:00.000Z",
+        name: "Physics",
+        code: "PHY",
     },
     {
         id: 4,
-        name: "Calculus I",
-        code: "MATH101",
-        department: "Math",
-        description: "Limits, derivatives, and introductory integration.",
-        created_at: "2025-01-22T09:00:00.000Z",
-    },
-    {
-        id: 5,
-        name: "Calculus II",
-        code: "MATH102",
-        department: "Math",
-        description: "Advanced integration techniques and series.",
-        created_at: "2025-01-25T09:00:00.000Z",
-    },
-    {
-        id: 6,
-        name: "Operating Systems",
-        code: "CS351",
-        department: "CS",
-        description: "Processes, memory, scheduling, and file systems.",
-        created_at: "2025-01-27T09:00:00.000Z",
-    },
-    {
-        id: 7,
-        name: "Database Systems",
-        code: "CS341",
-        department: "CS",
-        description: "Relational modeling, SQL, indexing, and transactions.",
-        created_at: "2025-02-01T09:00:00.000Z",
-    },
-    {
-        id: 8,
-        name: "English Composition",
-        code: "ENG101",
-        department: "English",
-        description: "Academic writing, rhetoric, and revision strategies.",
-        created_at: "2025-02-03T09:00:00.000Z",
-    },
-    {
-        id: 9,
-        name: "World Literature",
-        code: "ENG210",
-        department: "English",
-        description: "Global literary traditions from classic to modern works.",
-        created_at: "2025-02-05T09:00:00.000Z",
-    },
-    {
-        id: 10,
-        name: "Computer Networks",
-        code: "CS361",
-        department: "CS",
-        description: "Network layers, routing, protocols, and security basics.",
-        created_at: "2025-02-07T09:00:00.000Z",
-    },
-    {
-        id: 11,
-        name: "Discrete Mathematics",
-        code: "MATH215",
-        department: "Math",
-        description: "Logic, sets, combinatorics, and graph theory.",
-        created_at: "2025-02-10T09:00:00.000Z",
-    },
-    {
-        id: 12,
-        name: "Technical Writing",
-        code: "ENG230",
-        department: "English",
-        description: "Clear documentation, reports, and technical communication.",
-        created_at: "2025-02-12T09:00:00.000Z",
-    },
-    {
-        id: 13,
-        name: "Probability and Statistics",
-        code: "MATH240",
-        department: "Math",
-        description: "Probability models, random variables, and statistical inference.",
-        created_at: "2025-02-14T09:00:00.000Z",
-    },
-    {
-        id: 14,
-        name: "Compiler Design",
-        code: "CS420",
-        department: "CS",
-        description: "Lexing, parsing, semantic analysis, and code generation.",
-        created_at: "2025-02-16T09:00:00.000Z",
-    },
-    {
-        id: 15,
-        name: "Software Engineering",
-        code: "CS330",
-        department: "CS",
-        description: "Team workflows, testing, architecture, and delivery practices.",
-        created_at: "2025-02-18T09:00:00.000Z",
-    },
-    {
-        id: 16,
-        name: "Numerical Methods",
-        code: "MATH310",
-        department: "Math",
-        description: "Approximation, interpolation, and numerical solution methods.",
-        created_at: "2025-02-20T09:00:00.000Z",
-    },
-    {
-        id: 17,
-        name: "American Literature",
-        code: "ENG250",
-        department: "English",
-        description: "Survey of major American literary works and movements.",
-        created_at: "2025-02-22T09:00:00.000Z",
-    },
-    {
-        id: 18,
-        name: "Machine Learning Basics",
-        code: "CS410",
-        department: "CS",
-        description: "Supervised learning, model evaluation, and feature engineering.",
-        created_at: "2025-02-24T09:00:00.000Z",
-    },
-    {
-        id: 19,
-        name: "Differential Equations",
-        code: "MATH260",
-        department: "Math",
-        description: "First and second-order differential equations with applications.",
-        created_at: "2025-02-26T09:00:00.000Z",
-    },
-    {
-        id: 20,
-        name: "Creative Nonfiction",
-        code: "ENG320",
-        department: "English",
-        description: "Narrative nonfiction techniques and workshop-based writing.",
-        created_at: "2025-02-28T09:00:00.000Z",
+        name: "Chemistry",
+        code: "CHEM",
     },
 ];
-
-export const DEPARTMENT_OPTIONS = DEPARTMENTS.map((dept) => ({
-    value: dept.value,
-    label: dept.label,
-}));
